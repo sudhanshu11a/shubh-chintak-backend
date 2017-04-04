@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?><project-modules id="moduleCoreId" project-version="1.5.0">
+    <wb-module deploy-name="shubh-chintak-backend-rest-1.0">
+        <wb-resource deploy-path="/" source-path="/target/m2e-wtp/web-resources"/>
+        <wb-resource deploy-path="/" source-path="/src/main/webapp" tag="defaultRootSource"/>
+        <wb-resource deploy-path="/WEB-INF/classes" source-path="/src/main/java"/>
+        <wb-resource deploy-path="/WEB-INF/classes" source-path="/src/main/resources"/>
+        <dependent-module archiveName="shubh-chintak-backend-api-1.0.jar" deploy-path="/WEB-INF/lib" handle="module:/resource/shubh-chintak-backend-api/shubh-chintak-backend-api">
+            <dependency-type>uses</dependency-type>
+        </dependent-module>
+        <dependent-module archiveName="shubh-chintak-backend-common-1.0.jar" deploy-path="/WEB-INF/lib" handle="module:/resource/shubh-chintak-backend-common/shubh-chintak-backend-common">
+            <dependency-type>uses</dependency-type>
+        </dependent-module>
+        <dependent-module archiveName="shubh-chintak-backend-service-1.0.jar" deploy-path="/WEB-INF/lib" handle="module:/resource/shubh-chintak-backend-service/shubh-chintak-backend-service">
+            <dependency-type>uses</dependency-type>
+        </dependent-module>
+        <dependent-module archiveName="shubh-chintak-backend-persistence-1.0.jar" deploy-path="/WEB-INF/lib" handle="module:/resource/shubh-chintak-backend-persistence/shubh-chintak-backend-persistence">
+            <dependency-type>uses</dependency-type>
+        </dependent-module>
+        <property name="context-root" value="shubh-chintak-backend-rest"/>
+        <property name="java-output-path" value="/shubh-chintak-backend-rest/target/classes"/>
+    </wb-module>
+</project-modules>

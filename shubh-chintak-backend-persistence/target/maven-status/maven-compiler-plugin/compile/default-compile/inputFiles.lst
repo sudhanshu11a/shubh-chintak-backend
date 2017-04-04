@@ -1,0 +1,14 @@
+F:\workspace\shubh-chintak-backend\shubh-chintak-backend-persistence\src\main\java\org\shubhchintak\persistence\entity\Project.java
+F:\workspace\shubh-chintak-backend\shubh-chintak-backend-persistence\src\main\java\org\shubhchintak\persistence\entity\Menu.java
+F:\workspace\shubh-chintak-backend\shubh-chintak-backend-persistence\src\main\java\org\shubhchintak\persistence\entity\Tenant.java
+F:\workspace\shubh-chintak-backend\shubh-chintak-backend-persistence\src\main\java\org\shubhchintak\persistence\entity\User.java
+F:\workspace\shubh-chintak-backend\shubh-chintak-backend-persistence\src\main\java\org\shubhchintak\persistence\entity\UploadFile.java
+F:\workspace\shubh-chintak-backend\shubh-chintak-backend-persistence\src\main\java\org\shubhchintak\persistence\entity\Role.java
+F:\workspace\shubh-chintak-backend\shubh-chintak-backend-persistence\src\main\java\org\shubhchintak\persistence\entity\Permission.java
+F:\workspace\shubh-chintak-backend\shubh-chintak-backend-persistence\src\main\java\org\shubhchintak\persistence\repository\UserRepository.java
+F:\workspace\shubh-chintak-backend\shubh-chintak-backend-persistence\src\main\java\org\shubhchintak\persistence\entity\ProjectEvent.java
+F:\workspace\shubh-chintak-backend\shubh-chintak-backend-persistence\src\main\java\org\shubhchintak\persistence\entity\Organization.java
+F:\workspace\shubh-chintak-backend\shubh-chintak-backend-persistence\src\main\java\org\shubhchintak\persistence\entity\base\BaseEntity.java
+F:\workspace\shubh-chintak-backend\shubh-chintak-backend-persistence\src\main\java\org\shubhchintak\persistence\config\JpaConfiguration.java
+F:\workspace\shubh-chintak-backend\shubh-chintak-backend-persistence\src\main\java\org\shubhchintak\persistence\entity\UserRole.java
+F:\workspace\shubh-chintak-backend\shubh-chintak-backend-persistence\src\main\java\org\shubhchintak\persistence\entity\MenuItem.java

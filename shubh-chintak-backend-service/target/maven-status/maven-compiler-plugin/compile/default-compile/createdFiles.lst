@@ -1,0 +1,3 @@
+org\shubhchintak\service\convertor\UserDTOConvertor.class
+org\shubhchintak\service\convertor\base\BaseConvertor.class
+org\shubhchintak\service\impl\UserServiceImpl.class

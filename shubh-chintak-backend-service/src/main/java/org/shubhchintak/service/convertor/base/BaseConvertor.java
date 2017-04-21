@@ -3,14 +3,21 @@
  */
 package org.shubhchintak.service.convertor.base;
 
+import java.util.List;
+
 /**
  * @author sudhanshusharma
  *
  */
-public interface BaseConvertor<T, E> {
+public interface BaseConvertor<DTO, E> {
 
-	public T entityToDTO(E e); 
+	DTO entityToDTO(E entity); 
 
-	public E DTOToEntity(T t);
+	E dtoToEntity(DTO dto);
+	
+	List<DTO> entityListToDTOList(List<E> entities); 
+
+	List<E> dtoListToEntityList(List<DTO> dtos);
+	
 	
 }

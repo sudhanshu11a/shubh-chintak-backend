@@ -1,26 +1,27 @@
-/**
+	/**
  * 
  */
 package org.shubhchintak.service.impl;
 
-import java.util.ArrayList;
-import java.util.HashSet;
 import java.util.List;
-import java.util.Set;
 
 import org.shubhchintak.api.service.UserService;
+import org.shubhchintak.common.dto.OrganizationDTO;
 import org.shubhchintak.common.dto.UserDTO;
-import org.shubhchintak.persistence.entity.Role;
+import org.shubhchintak.common.dto.UserInfoDTO;
+import org.shubhchintak.common.dto.UserPrincipal;
+import org.shubhchintak.common.exception.ApiException;
+import org.shubhchintak.persistence.entity.Organization;
 import org.shubhchintak.persistence.entity.User;
+import org.shubhchintak.persistence.repository.OrganizationRepository;
 import org.shubhchintak.persistence.repository.UserRepository;
-import org.shubhchintak.service.convertor.UserDTOConvertor;
-import org.shubhchintak.service.convertor.base.BaseConvertor;
+import org.shubhchintak.service.converter.EntityToModelConverter;
+import org.shubhchintak.service.converter.ModelToEntityConverter;
+import org.shubhchintak.service.converter.ModelToModelConverter;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Qualifier;
-import org.springframework.security.core.GrantedAuthority;
-import org.springframework.security.core.authority.SimpleGrantedAuthority;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
@@ -33,23 +34,34 @@ import org.springframework.transaction.annotation.Transactional;
 @Service
 @Transactional
 public class UserServiceImpl implements UserService {
-	
+
 	/** The Constant LOGGER. */
-	private static final Logger LOGGER  = LoggerFactory.getLogger(UserServiceImpl.class);
+	private static final Logger logger = LoggerFactory.getLogger(UserServiceImpl.class);
+
+	@Autowired
+	private ModelToEntityConverter modelToEntityConverter;
+
+	@Autowired
+	private EntityToModelConverter entityToModelConverter;
+
+	@Autowired
+	private ModelToModelConverter modelToModelConverter;
 
 	@Autowired
 	private UserRepository userRepository;
 
-	
+	@Autowired
+	private OrganizationRepository organizationRepository;
+
 	@Override
-	public UserDTO getUserByName(String name, long organizationId, long tenantId) {
-		LOGGER.info("GetUserByName service called");
+	public UserDTO getUserByName(String name, long organizationId) {
 		UserDTO userDTO = null;
 		List<User> users = userRepository.findByUserName(name);
-		if (users != null && users.isEmpty()) {
-			userDTO = new UserDTO();
-			BaseConvertor<UserDTO, User> userDTOConvertor = new UserDTOConvertor();
-			userDTO = (UserDTO) userDTOConvertor.entityToDTO(users.get(0));
+
+		if (users != null && !users.isEmpty()) {
+			OrganizationDTO organizationDTO = entityToModelConverter
+					.organizationToOrganizationDTO(users.get(0).getOrganization());
+			userDTO = entityToModelConverter.userToUserModel(users.get(0), organizationDTO);
 		}
 		return userDTO;
 	}
@@ -57,34 +69,60 @@ public class UserServiceImpl implements UserService {
 	@Override
 	public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
 		List<User> users = userRepository.findByUserName(username);
-		System.out.println("User trying to login : " + username );
+		System.out.println("User trying to login : " + username);
 		User user = null;
-		List<GrantedAuthority> authorities = null;
-		if (users != null && users.isEmpty()) {
-			user = users.get(0);
-			authorities = buildUserAuthority(user.getRoles());
+		// List<GrantedAuthority> authorities = null;
+		if (users == null || users.isEmpty()) {
+			throw new UsernameNotFoundException(username);
 		}
-		return buildUserForAuthentication(user, authorities);
-
+		user = users.get(0);
+		OrganizationDTO organizationDTO = entityToModelConverter.organizationToOrganizationDTO(user.getOrganization());
+		UserDTO userDTO = entityToModelConverter.userToUserModel(user, organizationDTO);
+		return new UserPrincipal(userDTO, organizationDTO);
 	}
 
-	private org.springframework.security.core.userdetails.User buildUserForAuthentication(User user,
-			List<GrantedAuthority> authorities) {
-		return new org.springframework.security.core.userdetails.User(user.getUserName(), user.getPassword(),
-				user.getActive(), true, true, true, authorities);
-	}
+	@Override
+	public void createUser(UserDTO userDTO) throws ApiException {
 
-	private List<GrantedAuthority> buildUserAuthority(Set<Role> userRoles) {
-
-		Set<GrantedAuthority> setAuths = new HashSet<GrantedAuthority>();
-
-		// Build user's authorities
-		for (Role userRole : userRoles) {
-			setAuths.add(new SimpleGrantedAuthority(userRole.getRoleName()));
+		User user = null;
+		if (userDTO != null) {
+			try {
+				//current user information
+				UserPrincipal currentUserPrincipal = (UserPrincipal) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+				
+				// Converter to user entity
+				user = modelToEntityConverter.UserModelToUser(userDTO, currentUserPrincipal.getCurrentUserId(), currentUserPrincipal.getOrganizationId());
+				// call repository for saving user
+				userRepository.saveAndFlush(user);
+			} catch (Exception e) {
+				throw new ApiException(e.getMessage(), e);
+			}
+		} else {
+			throw new ApiException("IllLegalArgumentException : null is not allowed");
 		}
 
-		List<GrantedAuthority> Result = new ArrayList<GrantedAuthority>(setAuths);
-
-		return Result;
 	}
+
+	
+
+	@Override
+	public List<UserDTO> getAllUsers(long organizationId) throws ApiException {
+		//List<UserDTO> userInfoDTOList = null;
+		List<UserDTO> userDTOList = null;
+		List<User> users = null;
+		OrganizationDTO organizationDTO = null;
+		try {
+			users = userRepository.getAllUsersList(organizationId);
+			if (users != null && !users.isEmpty()) {
+				organizationDTO = entityToModelConverter.organizationToOrganizationDTO(users.get(0).getOrganization());
+				userDTOList = entityToModelConverter.userListToUserModelList(users, organizationDTO);
+				//userInfoDTOList = modelToModelConverter.userDTOListToUserInfoDTOList(userDTOList);
+			}
+		} catch (Exception e) {
+			throw new ApiException(e.getMessage(), e);
+		}
+		return userDTOList;
+	}
+
+	
 }

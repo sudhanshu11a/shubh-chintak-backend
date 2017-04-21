@@ -1,7 +1,7 @@
 /**
  * 
  */
-package org.shubhchintak.service.convertor.impl;
+package org.shubhchintak.service.impl;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.fail;
@@ -45,8 +45,8 @@ public class UserServiceImplTest {
 	@Test
 	public final void testGetUserByName() {
 		//UserDTO actual = userService.getUserByName("sudhanshu", 1, 1);
-		UserDTO expected = new UserDTO();
-		expected.setName("Sudhanshu");
+		//UserDTO expected = new UserDTO();
+		//expected.setUserName("sudhanshu");
 		
 		//assertEquals(expected.getName(), actual.getName());
 		//fail("Not yet implemented"); // TODO

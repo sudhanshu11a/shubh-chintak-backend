@@ -9,7 +9,7 @@ import org.springframework.web.servlet.support.AbstractAnnotationConfigDispatche
  * @author sudhanshusharma
  *
  */
-public class MyWebInitializer extends AbstractAnnotationConfigDispatcherServletInitializer {
+public class AppInitializer extends AbstractAnnotationConfigDispatcherServletInitializer {
 
 	@Override
 	protected Class<?>[] getServletConfigClasses() {
@@ -17,12 +17,14 @@ public class MyWebInitializer extends AbstractAnnotationConfigDispatcherServletI
 	}
 
 	@Override
-	protected String[] getServletMappings() {
-		return new String[] { "/" };
-	}
-
-	@Override
 	protected Class<?>[] getRootConfigClasses() {
 		return null;
 	}
+
+	@Override
+	protected String[] getServletMappings() {
+		return new String[] {"/"};
+		//return new String[] { "*.html", "*.jsp", "*.json" };
+	}
+
 }

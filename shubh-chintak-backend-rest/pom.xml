@@ -26,13 +26,11 @@
 			<groupId>org.sudhanshu.ngo</groupId>
 			<artifactId>shubh-chintak-backend-service</artifactId>
 		</dependency>
-		
+
 		<!-- Shubhchintak persistence -->
-		<!-- <dependency>
-			<groupId>org.sudhanshu.ngo</groupId>
-			<artifactId>shubh-chintak-backend-persistence</artifactId>
-		</dependency> -->
-		
+		<!-- <dependency> <groupId>org.sudhanshu.ngo</groupId> <artifactId>shubh-chintak-backend-persistence</artifactId> 
+			</dependency> -->
+
 		<!-- Spring WebMVC -->
 		<dependency>
 			<groupId>org.springframework</groupId>
@@ -70,6 +68,23 @@
 			<groupId>org.springframework.security</groupId>
 			<artifactId>spring-security-config</artifactId>
 		</dependency>
+
+		<dependency>
+			<groupId>javax.validation</groupId>
+			<artifactId>validation-api</artifactId>
+		</dependency>
+
+		<!-- Need this for json to/from object -->
+		<!-- <dependency>
+			<groupId>com.fasterxml.jackson.core</groupId>
+			<artifactId>jackson-core</artifactId>
+		</dependency>
+
+		<dependency>
+			<groupId>com.fasterxml.jackson.core</groupId>
+			<artifactId>jackson-databind</artifactId>
+		</dependency> -->
+
 	</dependencies>
 
 </project>

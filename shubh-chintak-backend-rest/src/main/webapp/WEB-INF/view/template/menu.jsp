@@ -14,7 +14,7 @@
                             <!-- /input-group -->
                         </li>
                         <li>
-                            <a href="home"><i class="fa fa-dashboard fa-fw"></i> Dashboard</a>
+                            <a href="${pageContext.request.contextPath}/welcome/home"><i class="fa fa-dashboard fa-fw"></i>Dashboard</a>
                         </li>
                         <li>
                             <a href="#"><i class="fa fa-bar-chart-o fa-fw"></i>Photo Gallery<span class="fa arrow"></span></a>
@@ -89,13 +89,14 @@
                             <!-- /.nav-second-level -->
                         </li>
                         <li>
-                            <a href="#"><i class="fa fa-files-o fa-fw"></i> Sample Pages<span class="fa arrow"></span></a>
+                            <a href="#"><i class="fa fa-files-o fa-fw"></i> Admin <span class="fa arrow"></span></a>
                             <ul class="nav nav-second-level">
+                                
                                 <li>
-                                    <a href="blank.html">Blank Page</a>
+                                    <a href="${pageContext.request.contextPath}/welcome/admin/user/allUsers.html">All Users</a>
                                 </li>
                                 <li>
-                                    <a href="login.html">Login Page</a>
+                                    <a href="${pageContext.request.contextPath}/welcome/admin/user/createUser">Create New Users</a>
                                 </li>
                             </ul>
                             <!-- /.nav-second-level -->

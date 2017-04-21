@@ -8,6 +8,7 @@ import java.util.List;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
@@ -25,20 +26,22 @@ import org.shubhchintak.persistence.entity.base.BaseEntity;
 @Table(name = "project_event")
 public class ProjectEvent extends BaseEntity {
 
+	@Column(name = "name", nullable=false)
 	private String name;
 
 	private String description;
 
+	@Column(nullable = false)
 	private String heading;
 
-	@Column(name = "display_details")
+	@Column(name = "display_details", nullable = false)
 	private String displayDetails;
 
-	@ManyToOne
-	@JoinColumn(name ="project" , referencedColumnName ="id")
+	@ManyToOne(fetch = FetchType.LAZY)
+	@JoinColumn(name ="project" , referencedColumnName ="id", nullable=false)
 	private Project project;
 
-	@Column(name = "is_one_day_event")
+	@Column(name = "is_one_day_event", nullable=false)
 	private Boolean oneDayEvent;
 
 	@Temporal(TemporalType.TIMESTAMP)
@@ -49,8 +52,10 @@ public class ProjectEvent extends BaseEntity {
 	@Column(name = "end_date", nullable = true)
 	private Date endDate;
 
+	@Column(nullable=true)
 	private String location;
 
+	@Column(name="meeting_point", nullable=true)
 	private String meetingPoint;
 
 	@ManyToOne
@@ -60,6 +65,86 @@ public class ProjectEvent extends BaseEntity {
 	@OneToMany
 	@JoinColumn(name="banner_images" , referencedColumnName="id")
 	private List<UploadFile> bannerImage;
+
+	
+	public ProjectEvent() {
+		// TODO Auto-generated constructor stub
+	}
+	
+	
+	/**
+	 * @param name
+	 * @param description
+	 * @param heading
+	 * @param displayDetails
+	 * @param project
+	 * @param oneDayEvent
+	 * @param startDate
+	 * @param endDate
+	 * @param location
+	 * @param meetingPoint
+	 * @param logoImage
+	 * @param bannerImage
+	 */
+	public ProjectEvent(String name, String description, String heading, String displayDetails, Project project,
+			Boolean oneDayEvent, Date startDate, Date endDate, String location, String meetingPoint,
+			UploadFile logoImage, List<UploadFile> bannerImage) {
+		super();
+		this.name = name;
+		this.description = description;
+		this.heading = heading;
+		this.displayDetails = displayDetails;
+		this.project = project;
+		this.oneDayEvent = oneDayEvent;
+		this.startDate = startDate;
+		this.endDate = endDate;
+		this.location = location;
+		this.meetingPoint = meetingPoint;
+		this.logoImage = logoImage;
+		this.bannerImage = bannerImage;
+	}
+
+
+
+	/**
+	 * @param id
+	 * @param createdDate
+	 * @param createdBy
+	 * @param modifiedDate
+	 * @param modifiedBy
+	 * @param active
+	 * @param organization
+	 * @param name
+	 * @param description
+	 * @param heading
+	 * @param displayDetails
+	 * @param project
+	 * @param oneDayEvent
+	 * @param startDate
+	 * @param endDate
+	 * @param location
+	 * @param meetingPoint
+	 * @param logoImage
+	 * @param bannerImage
+	 */
+	public ProjectEvent(Long id, Date createdDate, Long createdBy, Date modifiedDate, Long modifiedBy, Boolean active,
+			Long organizationId, String name, String description, String heading, String displayDetails,
+			Project project, Boolean oneDayEvent, Date startDate, Date endDate, String location, String meetingPoint,
+			UploadFile logoImage, List<UploadFile> bannerImage) {
+		super(id, createdDate, createdBy, modifiedDate, modifiedBy, active, organizationId);
+		this.name = name;
+		this.description = description;
+		this.heading = heading;
+		this.displayDetails = displayDetails;
+		this.project = project;
+		this.oneDayEvent = oneDayEvent;
+		this.startDate = startDate;
+		this.endDate = endDate;
+		this.location = location;
+		this.meetingPoint = meetingPoint;
+		this.logoImage = logoImage;
+		this.bannerImage = bannerImage;
+	}
 
 	public String getName() {
 		return name;

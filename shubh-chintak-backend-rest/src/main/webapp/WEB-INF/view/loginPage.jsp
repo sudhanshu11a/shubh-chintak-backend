@@ -63,7 +63,9 @@
 						<div class="form-top">
 							<div class="form-top-left">
 								<h1>
-									<strong>Shubh-Chintak</strong> <a class="btn btn-lg btn-primary" href="public.jsp" role="button">Home Page</a>
+									<strong>Shubh-Chintak</strong> <a
+										class="btn btn-lg btn-primary" href="public.jsp" role="button">Home
+										Page</a>
 								</h1>
 								<p>Enter your username and password to log on:</p>
 							</div>
@@ -72,13 +74,23 @@
 							</div>
 						</div>
 						<div class="form-bottom">
-							<c:if test="${SPRING_SECURITY_LAST_EXCEPTION !=NULL} ">
-								<div>YOUR LOGIN ATTEMPT WAS UNSUCCESSFUL BECAUSE
-									${sessionScope["SPRING_SECURITY_LAST_EXCEPTION"].message }</div>
-
+							<%-- <c:if test="${param.error != null}"> --%>
+							<c:if test="${not empty SPRING_SECURITY_LAST_EXCEPTION}">
+								<div class="alert alert-danger">
+									<p>
+										Invalid username and password.
+										<c:out value="${SPRING_SECURITY_LAST_EXCEPTION.message}" />
+										.
+									</p>
+								</div>
+							</c:if>
+							<c:if test="${param.logout != null}">
+								<div class="alert alert-success">
+									<p>You have been logged out successfully.</p>
+								</div>
 							</c:if>
 
-							<form role="form" action="<c:url value='/login'/>" method="post"
+							<form role="form" action="${loginUrl}" method="post"
 								class="login-form">
 								<div class="form-group">
 									<label class="sr-only" for="form-username">Username</label> <input
@@ -90,7 +102,10 @@
 										type="password" name="password" placeholder="Password..."
 										class="form-password form-control" id="form-password">
 								</div>
-								<button type="submit" class="btn">Sign in!</button>
+								<input type="hidden" name="${_csrf.parameterName}"
+									value="${_csrf.token}" />
+								<button id="signInSubmit" type="submit" class="btn">Sign
+									in!</button>
 							</form>
 
 						</div>
@@ -100,9 +115,21 @@
 					<div class="col-sm-6 col-sm-offset-3 social-login">
 						<h3>...or login with:</h3>
 						<div class="form-bottom social-login-buttons">
-							<a class="btn btn-link-1 btn-link-1-facebook" href="#"> <i
+
+							<form action="/connect/facebook" method="POST">
+								<input type="hidden" name="scope" value="user_posts" />
+								<div class="formInfo">
+									<p>You aren't connected to Facebook yet. Click the button
+										to connect this application with your Facebook account.</p>
+								</div>
+								<p>
+								<!-- <a class="btn btn-link-1 btn-link-1-facebook" href="#"> <i
 								class="fa fa-facebook"></i> Facebook
-							</a> <a class="btn btn-link-1 btn-link-1-twitter" href="#"> <i
+							</a>  -->
+									<button class="btn btn-link-1 btn-link-1-facebook" type="submit">Connect to Facebook</button>
+								</p>
+							</form>
+							<a class="btn btn-link-1 btn-link-1-twitter" href="#"> <i
 								class="fa fa-twitter"></i> Twitter
 							</a> <a class="btn btn-link-1 btn-link-1-google-plus" href="#"> <i
 								class="fa fa-google-plus"></i> Google Plus

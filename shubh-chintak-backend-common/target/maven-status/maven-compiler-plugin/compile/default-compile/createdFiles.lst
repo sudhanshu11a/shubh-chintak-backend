@@ -1,7 +1,0 @@
-org\shubhchintak\common\dto\BaseDTO.class
-org\shubhchintak\common\exception\UserNotFoundException.class
-org\shubhchintak\common\dto\ProjectDTO.class
-org\shubhchintak\common\dto\TenantDTO.class
-org\shubhchintak\common\dto\UserDTO.class
-org\shubhchintak\common\dto\OrganizationDTO.class
-org\shubhchintak\common\dto\UploadFileDTO.class

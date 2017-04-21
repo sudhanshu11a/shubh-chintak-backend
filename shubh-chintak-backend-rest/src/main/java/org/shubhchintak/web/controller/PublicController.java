@@ -25,6 +25,8 @@ public class PublicController {
 	@RequestMapping(value = "/", method = RequestMethod.GET)
 	public String login(Model model) {
 		System.out.println("Public page");
+		//userService.getUserByName("sudhanshu", 1);
+		
 		String path = "http://localhost:8088/images/teams/team1.jpg";
 		model.addAttribute("banner1", path);
 		// String name = principal.getName();

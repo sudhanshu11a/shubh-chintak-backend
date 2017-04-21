@@ -1,6 +1,0 @@
-org\shubhchintak\config\MyWebInitializer.class
-org\shubhchintak\config\SpringWebConfig.class
-org\shubhchintak\web\controller\HomePageNavigation.class
-org\shubhchintak\web\controller\PublicController.class
-org\shubhchintak\config\SecurityConfig.class
-org\shubhchintak\web\controller\LoginController.class

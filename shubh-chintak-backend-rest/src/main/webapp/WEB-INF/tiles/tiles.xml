@@ -3,12 +3,31 @@
        "-//Apache Software Foundation//DTD Tiles Configuration 3.0//EN"
        "http://tiles.apache.org/dtds/tiles-config_3_0.dtd">
 <tiles-definitions>
- 
-    <definition name="defaultTemplate" template="/view/template/template.jsp">
-        <put-attribute name="header" value="/view/template/header.jsp" />
-        <put-attribute name="menu" value="/view/template/menu.jsp" />
-        <put-attribute name="body" value="/view/template/body.jsp" />
-        <put-attribute name="footer" value="/view/template/footer.jsp" />
-    </definition>
- 
+
+	<definition name="defaultTemplate" template="/WEB-INF/view/template/template.jsp">
+		<put-attribute name="header" value="/WEB-INF/view/template/header.jsp" />
+		<put-attribute name="menu" value="/WEB-INF/view/template/menu.jsp" />
+		<put-attribute name="body" value="" />
+		<put-attribute name="footer" value="/WEB-INF/view/template/footer.jsp" />
+	</definition>
+
+	<definition name="tiles/dashboard" extends="defaultTemplate">
+		<put-attribute name="body" value="/WEB-INF/view/pages/dashboard.jsp" />
+	</definition>
+
+	<definition name="tiles/admin/user/createUser" extends="defaultTemplate">
+		<put-attribute name="body"
+			value="/WEB-INF/view/pages/admin/user/createUser.jsp" />
+	</definition>
+	
+	<definition name="tiles/admin/user/allUserList" extends="defaultTemplate">
+		<put-attribute name="body"
+			value="/WEB-INF/view/pages/admin/user/allUserList.jsp" />
+	</definition>
+
+	<definition name="tiles/admin/user/userDetails" extends="defaultTemplate">
+		<put-attribute name="body" value="/WEB-IN/view/pages/admin/user/userDetails.jsp" />
+	</definition>
+
+
 </tiles-definitions>

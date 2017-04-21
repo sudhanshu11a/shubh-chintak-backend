@@ -8,6 +8,7 @@ import java.util.List;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
@@ -26,10 +27,13 @@ import org.shubhchintak.persistence.entity.base.BaseEntity;
 @Table(name = "project")
 public class Project extends BaseEntity {
 
+	@Column(name="name" , nullable = false )
 	private String name;
 
+	@Column(name = "description")
 	private String description;
 
+	@Column(name="heading" , nullable = false )
 	private String heading;
 
 	@Column(name = "display_details")
@@ -43,13 +47,74 @@ public class Project extends BaseEntity {
 	@Column(name = "end_date", nullable = true)
 	private Date endDate;
 
-	@ManyToOne
+	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name="log_image" , referencedColumnName="id")
 	private UploadFile logoImage;
 
-	@OneToMany
+	@OneToMany(fetch = FetchType.LAZY)
 	@JoinColumn(name="banner_images" , referencedColumnName="id")
 	private List<UploadFile> bannerImage;
+
+	public Project() {
+		// TODO Auto-generated constructor stub
+	}
+	
+	
+	/**
+	 * @param name
+	 * @param description
+	 * @param heading
+	 * @param displayDetails
+	 * @param startDate
+	 * @param endDate
+	 * @param logoImage
+	 * @param bannerImage
+	 */
+	public Project(String name, String description, String heading, String displayDetails, Date startDate, Date endDate,
+			UploadFile logoImage, List<UploadFile> bannerImage) {
+		super();
+		this.name = name;
+		this.description = description;
+		this.heading = heading;
+		this.displayDetails = displayDetails;
+		this.startDate = startDate;
+		this.endDate = endDate;
+		this.logoImage = logoImage;
+		this.bannerImage = bannerImage;
+	}
+
+
+
+	/**
+	 * @param id
+	 * @param createdDate
+	 * @param createdBy
+	 * @param modifiedDate
+	 * @param modifiedBy
+	 * @param active
+	 * @param organization
+	 * @param name
+	 * @param description
+	 * @param heading
+	 * @param displayDetails
+	 * @param startDate
+	 * @param endDate
+	 * @param logoImage
+	 * @param bannerImage
+	 */
+	public Project(Long id, Date createdDate, Long createdBy, Date modifiedDate, Long modifiedBy, Boolean active,
+			Long organizationId, String name, String description, String heading, String displayDetails,
+			Date startDate, Date endDate, UploadFile logoImage, List<UploadFile> bannerImage) {
+		super(id, createdDate, createdBy, modifiedDate, modifiedBy, active, organizationId);
+		this.name = name;
+		this.description = description;
+		this.heading = heading;
+		this.displayDetails = displayDetails;
+		this.startDate = startDate;
+		this.endDate = endDate;
+		this.logoImage = logoImage;
+		this.bannerImage = bannerImage;
+	}
 
 	public String getName() {
 		return name;

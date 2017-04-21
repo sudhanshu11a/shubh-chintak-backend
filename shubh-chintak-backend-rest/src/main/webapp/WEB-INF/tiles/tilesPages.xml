@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="ISO-8859-1" ?>
+<!DOCTYPE tiles-definitions PUBLIC
+       "-//Apache Software Foundation//DTD Tiles Configuration 3.0//EN"
+       "http://tiles.apache.org/dtds/tiles-config_3_0.dtd">
+<tiles-definitions>
+ 
+ <definition name="pages/dashboard" extends="defaultTemplate">
+        <put-attribute name="body"    
+        value="view/template/body.jsp" />
+    </definition>
+ 
+   <definition name="createUser" extends="defaultTemplate">
+        <put-attribute name="body"    
+        value="view/pages/admin/user/createUser.jsp" />
+    </definition>
+ 
+    <definition name="personList" extends="defaultTemplate">
+        <put-attribute name="body"    
+        value="/welcome/admin/createUser.html" />
+    </definition>
+ 
+</tiles-definitions>

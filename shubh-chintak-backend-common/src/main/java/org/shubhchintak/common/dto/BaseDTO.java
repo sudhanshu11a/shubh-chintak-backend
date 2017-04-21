@@ -3,6 +3,7 @@
  */
 package org.shubhchintak.common.dto;
 
+import java.io.Serializable;
 import java.util.Date;
 
 import org.shubhchintak.common.dto.OrganizationDTO;
@@ -12,7 +13,12 @@ import org.shubhchintak.common.dto.TenantDTO;
  * @author sudhanshusharma
  *
  */
-public abstract class BaseDTO {
+public abstract class BaseDTO implements Serializable {
+
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 5400906851305224533L;
 
 	/** The id. */
 	private Long id;
@@ -29,11 +35,39 @@ public abstract class BaseDTO {
 	/** The modified by. */
 	private Long modifiedBy;
 
-	private Boolean isActive;
+	/** The soft delete. */
+	private Boolean active;
 
-	private TenantDTO tenant;
+	//private long organizationId;
 
-	private OrganizationDTO organization;
+	/**
+	 * 
+	 */
+	public BaseDTO() {
+		super();
+		// TODO Auto-generated constructor stub
+	}
+
+	/**
+	 * @param id
+	 * @param createdDate
+	 * @param createdBy
+	 * @param modifiedDate
+	 * @param modifiedBy
+	 * @param isActive
+	 * @param organization
+	 */
+	public BaseDTO(Long id, Date createdDate, Long createdBy, Date modifiedDate, Long modifiedBy, Boolean active) {
+		super();
+		this.id = id;
+		this.createdDate = createdDate;
+		this.createdBy = createdBy;
+		this.modifiedDate = modifiedDate;
+		this.modifiedBy = modifiedBy;
+		this.active = active;
+		
+		//this.organization = organization;
+	}
 
 	/**
 	 * Gets the id.
@@ -130,29 +164,35 @@ public abstract class BaseDTO {
 		this.modifiedBy = modifiedBy;
 	}
 
-	public Boolean getIsActive() {
-		return isActive;
+	/**
+	 * @return the active
+	 */
+	public Boolean getActive() {
+		return active;
 	}
 
-	public void setIsActive(Boolean isActive) {
-		this.isActive = isActive;
+	/**
+	 * @param active
+	 *            the active to set
+	 */
+	public void setActive(Boolean active) {
+		this.active = active;
 	}
 
-	public TenantDTO getTenantDTOId() {
-		return tenant;
-	}
+//	/**
+//	 * @return the organizationId
+//	 */
+//	public long getOrganizationId() {
+//		return organizationId;
+//	}
+//
+//	/**
+//	 * @param organizationId the organizationId to set
+//	 */
+//	public void setOrganizationId(long organizationId) {
+//		this.organizationId = organizationId;
+//	}
 
-	public void setTenantDTOId(TenantDTO tenant) {
-		this.tenant = tenant;
-	}
 
-	public OrganizationDTO getOrganizationId() {
-		return organization;
-	}
 
-	public void setOrganizationId(OrganizationDTO organization) {
-		this.organization = organization;
-	}
-	
 }
-

@@ -19,25 +19,16 @@ import org.springframework.web.servlet.view.tiles3.TilesViewResolver;
  * @author sudhanshusharma
  *
  */
-@ComponentScan({ "org.shubhchintak" })
+@ComponentScan(basePackages = "org.shubhchintak")
 @EnableWebMvc // mvc:annotation-driven
 @Configuration
 public class SpringWebConfig extends WebMvcConfigurerAdapter {
-
-	/**
-	 * Configure ResourceHandlers to serve static resources like CSS/ Javascript
-	 * etc...
-	 */
-	@Override
-	public void addResourceHandlers(ResourceHandlerRegistry registry) {
-		registry.addResourceHandler("/resources/**").addResourceLocations("/resources/");
-	}
 
 	@Bean
 	public InternalResourceViewResolver viewResolver() {
 		InternalResourceViewResolver viewResolver = new InternalResourceViewResolver();
 		viewResolver.setViewClass(JstlView.class);
-		viewResolver.setPrefix("/view/");
+		viewResolver.setPrefix("/WEB-INF/view/");
 		viewResolver.setSuffix(".jsp");
 		return viewResolver;
 	}
@@ -48,7 +39,7 @@ public class SpringWebConfig extends WebMvcConfigurerAdapter {
 	@Bean
 	public TilesConfigurer tilesConfigurer() {
 		TilesConfigurer tilesConfigurer = new TilesConfigurer();
-		tilesConfigurer.setDefinitions(new String[] { "/WEB-INF/tiles.xml" });
+		tilesConfigurer.setDefinitions(new String[] { "/WEB-INF/tiles/tiles.xml" });
 		tilesConfigurer.setCheckRefresh(true);
 		return tilesConfigurer;
 	}
@@ -60,6 +51,15 @@ public class SpringWebConfig extends WebMvcConfigurerAdapter {
 	public void configureViewResolvers(ViewResolverRegistry registry) {
 		TilesViewResolver viewResolver = new TilesViewResolver();
 		registry.viewResolver(viewResolver);
+	}
+
+	/**
+	 * Configure ResourceHandlers to serve static resources like CSS/ Javascript
+	 * etc...
+	 */
+	@Override
+	public void addResourceHandlers(ResourceHandlerRegistry registry) {
+		registry.addResourceHandler("/resources/**").addResourceLocations("/WEB-INF/resources/");
 	}
 
 }

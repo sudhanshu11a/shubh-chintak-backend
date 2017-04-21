@@ -3,7 +3,6 @@
  */
 package org.shubhchintak.persistence.entity;
 
-
 import java.util.Date;
 
 import javax.persistence.Column;
@@ -15,20 +14,19 @@ import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 
-
 /**
  * @author sudhanshusharma
  *
  */
 @Entity
-@Table(name="sys_organization")
-public class Organization{
+@Table(name = "sys_organization")
+public class Organization {
 
 	@Id
-	@GeneratedValue(strategy=GenerationType.IDENTITY)
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
-	
-	@Column(name="organization_name")
+
+	@Column(name = "organization_name", nullable = false)
 	private String organizationName;
 
 	/** The created date. */
@@ -49,10 +47,34 @@ public class Organization{
 	@Column(name = "modified_by", nullable = true)
 	private Long modifiedBy;
 
-	@Column(name = "is_active")
-	private Boolean isActive;
+	@Column(name = "is_active", nullable = false)
+	private Boolean active;
 
-	
+	public Organization() {
+		// TODO Auto-generated constructor stub
+	}
+
+	/**
+	 * @param id
+	 * @param organizationName
+	 * @param createdDate
+	 * @param createdBy
+	 * @param modifiedDate
+	 * @param modifiedBy
+	 * @param active
+	 */
+	public Organization(Long id, String organizationName, Date createdDate, Long createdBy, Date modifiedDate,
+			Long modifiedBy, Boolean active) {
+		super();
+		this.id = id;
+		this.organizationName = organizationName;
+		this.createdDate = createdDate;
+		this.createdBy = createdBy;
+		this.modifiedDate = modifiedDate;
+		this.modifiedBy = modifiedBy;
+		this.active = active;
+	}
+
 	public Long getId() {
 		return id;
 	}
@@ -101,16 +123,19 @@ public class Organization{
 		this.modifiedBy = modifiedBy;
 	}
 
-	public Boolean getIsActive() {
-		return isActive;
+	/**
+	 * @return the active
+	 */
+	public Boolean getActive() {
+		return active;
 	}
 
-	public void setIsActive(Boolean isActive) {
-		this.isActive = isActive;
+	/**
+	 * @param active
+	 *            the active to set
+	 */
+	public void setActive(Boolean active) {
+		this.active = active;
 	}
-	
-	
-	
 
-	
 }

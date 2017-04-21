@@ -13,19 +13,19 @@
 	</properties>
 
 	<dependencies>
-		<!-- Shubhchintak common data -->
-		<!-- <dependency>
+
+		<!-- Shubhchintak common -->
+		<dependency>
 			<groupId>org.sudhanshu.ngo</groupId>
-			<artifactId>shubh-chintak-backend</artifactId>
-			<version>${shubhchintak.version}</version>
-		</dependency> -->
+			<artifactId>shubh-chintak-backend-common</artifactId>
+		</dependency>
 
 		<!-- Spring data JPA -->
 		<dependency>
 			<groupId>org.springframework.data</groupId>
 			<artifactId>spring-data-jpa</artifactId>
 		</dependency>
-	
+
 		<!-- Hibernate -->
 		<dependency>
 			<groupId>org.hibernate</groupId>
@@ -38,5 +38,11 @@
 			<artifactId>mysql-connector-java</artifactId>
 		</dependency>
 
+		<dependency>
+			<groupId>org.springframework</groupId>
+			<artifactId>spring-context</artifactId>
+		</dependency>
+
+		
 	</dependencies>
 </project>

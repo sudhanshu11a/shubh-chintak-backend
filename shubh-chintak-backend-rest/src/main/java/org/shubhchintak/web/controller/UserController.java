@@ -15,27 +15,20 @@ import javax.validation.Valid;
 import org.shubhchintak.api.service.RoleService;
 import org.shubhchintak.api.service.UserService;
 import org.shubhchintak.common.dto.UserDTO;
-import org.shubhchintak.common.dto.UserInfoDTO;
-import org.shubhchintak.common.dto.UserPrincipal;
 import org.shubhchintak.common.enums.RoleEnum;
 import org.shubhchintak.common.exception.ApiException;
-import org.shubhchintak.common.util.UserUtil;
 import org.shubhchintak.constant.PageNameConstants;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.propertyeditors.CustomDateEditor;
 import org.springframework.http.MediaType;
-import org.springframework.security.core.GrantedAuthority;
-import org.springframework.security.core.annotation.AuthenticationPrincipal;
-import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.WebDataBinder;
 import org.springframework.web.bind.annotation.InitBinder;
 import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -111,7 +104,7 @@ public class UserController {
 			logger.error(e.getMessage());
 		}
 
-		return PageNameConstants.TILES_ALL_USERS_LIST;
+		return PageNameConstants.TILES_ALL_USERS_LIST_PAGE;
 
 	}
 
@@ -129,7 +122,7 @@ public class UserController {
 		} catch (ApiException e) {
 			logger.error(e.getMessage());
 		}
-		return PageNameConstants.TILES_ALL_USERS_LIST;
+		return PageNameConstants.TILES_ALL_USERS_LIST_PAGE;
 	}
 
 	@RequestMapping(value = "/admin/allUsers", method = RequestMethod.GET)

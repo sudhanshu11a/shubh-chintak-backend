@@ -31,7 +31,7 @@ import org.springframework.security.core.context.SecurityContextHolder;
  *
  */
 @MappedSuperclass
-//@EntityListeners(AuditingEntityListener.class)
+// @EntityListeners(AuditingEntityListener.class)
 public abstract class BaseEntity {
 
 	/** The id. */
@@ -71,8 +71,8 @@ public abstract class BaseEntity {
 	@Column(name = "organization_id", nullable = false, insertable = true, updatable = true)
 	private Long organizationId;
 
-	//@Version
-	//private Long version;
+	// @Version
+	// private Long version;
 
 	/**
 	 * 
@@ -109,7 +109,7 @@ public abstract class BaseEntity {
 		this.setCreatedDate(copyEntity.createdDate);
 		this.setModifiedBy(copyEntity.getModifiedBy());
 		this.setModifiedDate(copyEntity.getModifiedDate());
-
+		this.setOrganizationId(copyEntity.getOrganizationId());
 	}
 
 	/**
@@ -238,20 +238,20 @@ public abstract class BaseEntity {
 		this.organizationId = organizationId;
 	}
 
-//	/**
-//	 * @return the version
-//	 */
-//	public Long getVersion() {
-//		return version;
-//	}
-//
-//	/**
-//	 * @param version
-//	 *            the version to set
-//	 */
-//	public void setVersion(Long version) {
-//		this.version = version;
-//	}
+	// /**
+	// * @return the version
+	// */
+	// public Long getVersion() {
+	// return version;
+	// }
+	//
+	// /**
+	// * @param version
+	// * the version to set
+	// */
+	// public void setVersion(Long version) {
+	// this.version = version;
+	// }
 
 	@PrePersist
 	public void prePersist() {
@@ -265,7 +265,7 @@ public abstract class BaseEntity {
 		this.createdDate = new Date();
 		this.organizationId = currentUserPrincipal.getOrganizationId();
 		this.active = true;
-		
+
 	}
 
 	@PreUpdate

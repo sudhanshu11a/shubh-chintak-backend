@@ -103,7 +103,7 @@
 								<tr>
 									<td>Producer:</td>
 									<td>User : <form:select path="username">
-											<form:options items="${allUserList}" />
+											<form:options items="${allUserList}"  />
 										</form:select>
 										
 									</td>

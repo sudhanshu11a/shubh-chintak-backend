@@ -12,6 +12,8 @@ import org.shubhchintak.common.dto.ProjectDTO;
 import org.shubhchintak.common.exception.ApiException;
 import org.shubhchintak.persistence.entity.Project;
 import org.shubhchintak.persistence.repository.ProjectRepository;
+import org.shubhchintak.service.converter.EntityToModelConverter;
+import org.shubhchintak.service.converter.ModelToEntityConverter;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -30,6 +32,12 @@ public class ProjectServiceImpl implements ProjectService {
 
 	@Autowired
 	private ProjectRepository projectRepository;
+	
+	@Autowired
+	private ModelToEntityConverter modelToEntityConverter;
+	
+	@Autowired
+	private EntityToModelConverter entityToModelConverter;
 
 	/*
 	 * (non-Javadoc)
@@ -38,16 +46,13 @@ public class ProjectServiceImpl implements ProjectService {
 	 * long)
 	 */
 	@Override
-	public List<ProjectDTO> getAllProjects(long organizationId, long tenantId) throws ApiException {
+	public List<ProjectDTO> getAllProjects(long organizationId) throws ApiException {
 		List<ProjectDTO> projectDTOs = null;
 		try {
 			// get All projects from Repository
-			// List<Project> projects =
-			// projectRepository.getAllProjects(organizationId, tenantId);
-			// List<Project> projects = projectRepository.findAll();
+			 List<Project> projects = projectRepository.getAllProjects(organizationId);
 			// Convert to PojectDTOs
-			// ProjectConvertor projectConvertor = new ProjectConvertor();
-			// projectDTOs = projectConvertor.entityListToDTOList(projects);
+			 projectDTOs = entityToModelConverter.projectListToProjectodelList(projects);
 		} catch (Exception e) {
 			e.printStackTrace();
 			throw new ApiException(e.getMessage(), e);
@@ -60,9 +65,11 @@ public class ProjectServiceImpl implements ProjectService {
 	public void saveProject(ProjectDTO projectDTO) throws ApiException {
 		Project project = null;
 		try {
-			// ProjectConvertor projectConvertor = new ProjectConvertor();
-			// project = projectConvertor.dtoToEntity(projectDTO);
-			// project = projectRepository.saveAndFlush(project);
+			//project entity converter 
+			project = modelToEntityConverter.projectModelToProject(projectDTO);
+			
+			//save entity
+			project = projectRepository.saveAndFlush(project);
 		} catch (Exception e) {
 			throw new ApiException(e.getMessage(), e);
 		}

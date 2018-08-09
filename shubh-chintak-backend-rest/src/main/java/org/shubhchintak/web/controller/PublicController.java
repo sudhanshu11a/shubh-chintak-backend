@@ -27,7 +27,7 @@ public class PublicController {
 		System.out.println("Public page");
 		//userService.getUserByName("sudhanshu", 1);
 		
-		String path = "http://localhost:8088/images/teams/team1.jpg";
+		String path = "http://localhost:8080/images/teams/team1.jpg";
 		model.addAttribute("banner1", path);
 		// String name = principal.getName();
 		// name = employeeService.getEmployeeNameByName(name);

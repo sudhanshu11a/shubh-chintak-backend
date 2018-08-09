@@ -5,7 +5,6 @@ package org.shubhchintak.common.dto;
 
 import java.util.Date;
 
-
 /**
  * @author sudhanshusharma
  *
@@ -27,6 +26,37 @@ public class ProjectDTO extends BaseDTO {
 	private UploadFileDTO logoImage;
 
 	private UploadFileDTO bannerImage;
+
+	/**
+	 * 
+	 * @param id
+	 * @param createdDate
+	 * @param createdBy
+	 * @param modifiedDate
+	 * @param modifiedBy
+	 * @param active
+	 * @param name
+	 * @param description
+	 * @param heading
+	 * @param displayDetails
+	 * @param startDate
+	 * @param endDate
+	 * @param logoImage
+	 * @param bannerImage
+	 */
+	public ProjectDTO(Long id, Date createdDate, Long createdBy, Date modifiedDate, Long modifiedBy, Boolean active,
+			String name, String description, String heading, String displayDetails, Date startDate, Date endDate,
+			UploadFileDTO logoImage, UploadFileDTO bannerImage) {
+		super(id, createdDate, createdBy, modifiedDate, modifiedBy, active);
+		this.name = name;
+		this.description = description;
+		this.heading = heading;
+		this.displayDetails = displayDetails;
+		this.startDate = startDate;
+		this.endDate = endDate;
+		this.logoImage = logoImage;
+		this.bannerImage = bannerImage;
+	}
 
 	public String getName() {
 		return name;
@@ -91,6 +121,5 @@ public class ProjectDTO extends BaseDTO {
 	public void setBannerImage(UploadFileDTO bannerImage) {
 		this.bannerImage = bannerImage;
 	}
-	
-	
+
 }

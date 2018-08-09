@@ -4,14 +4,12 @@
 package org.shubhchintak.persistence.entity;
 
 import java.util.Date;
-import java.util.List;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
-import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
@@ -30,7 +28,7 @@ public class Project extends BaseEntity {
 	@Column(name="name" , nullable = false )
 	private String name;
 
-	@Column(name = "description")
+	@Column(name = "description", nullable = true)
 	private String description;
 
 	@Column(name="heading" , nullable = false )
@@ -51,9 +49,9 @@ public class Project extends BaseEntity {
 	@JoinColumn(name="log_image" , referencedColumnName="id")
 	private UploadFile logoImage;
 
-	@OneToMany(fetch = FetchType.LAZY)
-	@JoinColumn(name="banner_images" , referencedColumnName="id")
-	private List<UploadFile> bannerImage;
+	@ManyToOne(fetch = FetchType.LAZY)
+	@JoinColumn(name="banner_image" , referencedColumnName="id")
+	private UploadFile bannerImage;
 
 	public Project() {
 		// TODO Auto-generated constructor stub
@@ -71,7 +69,7 @@ public class Project extends BaseEntity {
 	 * @param bannerImage
 	 */
 	public Project(String name, String description, String heading, String displayDetails, Date startDate, Date endDate,
-			UploadFile logoImage, List<UploadFile> bannerImage) {
+			UploadFile logoImage, UploadFile bannerImage) {
 		super();
 		this.name = name;
 		this.description = description;
@@ -104,7 +102,7 @@ public class Project extends BaseEntity {
 	 */
 	public Project(Long id, Date createdDate, Long createdBy, Date modifiedDate, Long modifiedBy, Boolean active,
 			Long organizationId, String name, String description, String heading, String displayDetails,
-			Date startDate, Date endDate, UploadFile logoImage, List<UploadFile> bannerImage) {
+			Date startDate, Date endDate, UploadFile logoImage, UploadFile bannerImage) {
 		super(id, createdDate, createdBy, modifiedDate, modifiedBy, active, organizationId);
 		this.name = name;
 		this.description = description;
@@ -172,11 +170,11 @@ public class Project extends BaseEntity {
 		this.logoImage = logoImage;
 	}
 
-	public List<UploadFile> getBannerImage() {
+	public UploadFile getBannerImage() {
 		return bannerImage;
 	}
 
-	public void setBannerImage(List<UploadFile> bannerImage) {
+	public void setBannerImage(UploadFile bannerImage) {
 		this.bannerImage = bannerImage;
 	}
 

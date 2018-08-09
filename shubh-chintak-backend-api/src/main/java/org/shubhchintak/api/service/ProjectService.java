@@ -14,7 +14,7 @@ import org.shubhchintak.common.exception.ApiException;
  */
 public interface ProjectService {
 
-	List<ProjectDTO> getAllProjects(long organizationId, long tenantId) throws ApiException;
+	List<ProjectDTO> getAllProjects(long organizationId) throws ApiException;
 	
 	void saveProject(ProjectDTO projectDTO) throws ApiException;
 }

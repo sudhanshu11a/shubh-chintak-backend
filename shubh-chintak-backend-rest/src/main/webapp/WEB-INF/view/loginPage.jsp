@@ -64,7 +64,7 @@
 							<div class="form-top-left">
 								<h1>
 									<strong>Shubh-Chintak</strong> <a
-										class="btn btn-lg btn-primary" href="public.jsp" role="button">Home
+										class="btn btn-lg btn-primary" href="\" role="button">Home
 										Page</a>
 								</h1>
 								<p>Enter your username and password to log on:</p>

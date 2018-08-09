@@ -74,10 +74,10 @@ public class User extends BaseEntity {
 	 * CascadeType.DETACH : detaches all related entities if a “manual detach”
 	 * occurs. CascadeType.ALL : is shorthand for all of the above cascade
 	 * operations.
-	 * 
+	 * nullable should be false
 	 */
 	@OneToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL, orphanRemoval = true)
-	@JoinColumn(name = "user_details", nullable = false)
+	@JoinColumn(name = "user_details", nullable = true)
 	private UserDetails userDetails;
 
 	public User() {

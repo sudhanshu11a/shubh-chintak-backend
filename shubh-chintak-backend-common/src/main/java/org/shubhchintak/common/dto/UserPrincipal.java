@@ -31,7 +31,9 @@ public final class UserPrincipal implements UserDetails, CredentialsContainer, S
 	private final OrganizationDTO organizationDTO;
 	
 	public String getName(){
-		return null;
+		return userDTO.getFirstName()+
+			userDTO.getMiddleName()!=null?userDTO.getMiddleName()+" ":""+
+			userDTO.getMiddleName();
 	}
 	
 	public UserPrincipal() {

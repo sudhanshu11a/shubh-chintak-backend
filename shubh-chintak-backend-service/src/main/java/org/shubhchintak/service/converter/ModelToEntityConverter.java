@@ -84,7 +84,7 @@ public class ModelToEntityConverter {
 						dto.getLastName().trim(), dto.getDob(), dto.getEmailId().trim(), dto.getMobileNumber().trim(),
 						address, uploadFile);
 			} else {
-				userDetails = new UserDetails(dto.getFirstName().trim(), dto.getMiddleName().trim(),
+				userDetails = new UserDetails(dto.getFirstName().trim(), dto.getMiddleName() == null ? null: dto.getMiddleName().trim(),
 						dto.getLastName().trim(), dto.getDob(), dto.getEmailId().trim(), dto.getMobileNumber().trim(),
 						address, uploadFile);
 			}

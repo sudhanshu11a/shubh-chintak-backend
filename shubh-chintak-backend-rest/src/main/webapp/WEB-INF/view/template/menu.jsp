@@ -57,7 +57,7 @@
 					<li><a href="#">Users<span class="fa arrow"></span></a>
 						<ul class="nav nav-third-level">
 							<li><a
-								href="${pageContext.request.contextPath}/welcome/admin/user/allUsers.html">All
+								href="${pageContext.request.contextPath}/welcome/admin/user/allUsers">All
 									Users</a></li>
 							<li><a
 								href="${pageContext.request.contextPath}/welcome/admin/user/createUser">Create

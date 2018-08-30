@@ -3,7 +3,7 @@
 INSERT INTO `shubhchintak`.`sys_organization` (`id`, `created_by`, `created_date`, `is_active`, `modified_by`, `modified_date`, `organization_name`) VALUES ('1', '1', now(), true, '1', now(), 'Nagarro');
 
 --Sample menu
-INSERT INTO `shubhchintak`.`sys_menu` (`id`, `is_active`, `created_by`, `created_date`, `description`, `label`, `name`, `organization_id`) VALUES ('1', true, '1', now(), 'Settings', 'Setting', 'seting', '1');
+INSERT INTO `shubhchintak`.`sys_menu` (`id`, `is_active`, `created_by`, `created_date`, `modified_by`, `modified_date`, `organization_id`, `description`, `label`, `link`, `name`) VALUES ('1', true, '1', now(), '1', now(), '1', 'Settings description', 'Settings','abc' ,'Settings');
 
 --Role Master Data
 INSERT INTO `shubhchintak`.`sys_role` (`id`, `is_active`, `created_by`, `created_date`, `description`, `role_name`, `organization_id`) VALUES ('1', true, '1', now(), 'Admin Role', 'ROLE_ADMIN', '1');

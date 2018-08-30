@@ -9,11 +9,12 @@ package org.shubhchintak.constant;
  */
 public final class PageNameConstants {
 
+	// Dashboard Page
 	public static final String TILES_DASHBOARD = "tiles/dashboard";
 
 	// user pages
 	public static final String TILES_CREATE_NEW_USER_PAGE = "tiles/admin/user/createUser";
-	public static final String TILES_ALL_USERS_LIST_PAGE = "tiles/admin/user/allUserList";
+	public static final String TILES_ALL_USERS_LIST_PAGE = "tiles/admin/user/allUsers";
 	public static final String TILES_USER_DETAILS_PAGE = "tiles/admin/user/userDetails";
 
 	//role Pages

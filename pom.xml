@@ -1,4 +1,5 @@
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
 	<modelVersion>4.0.0</modelVersion>
 	<groupId>org.sudhanshu.ngo</groupId>
@@ -20,7 +21,7 @@
 		<spring.datajpa.version>1.11.1.RELEASE</spring.datajpa.version>
 		<spring.security.version>4.2.2.RELEASE</spring.security.version>
 		<spring.data.rest.webmvc.version>2.6.1.RELEASE</spring.data.rest.webmvc.version>
-		<mysql.connector.version>5.1.31</mysql.connector.version>
+		<mysql.connector.version>8.0.11</mysql.connector.version>
 		<hibernate.version>4.3.5.Final</hibernate.version>
 		<validation.api>1.1.0.Final</validation.api>
 		<validation.api.hibernate>5.4.1.Final</validation.api.hibernate>
@@ -117,6 +118,12 @@
 				<version>${spring.datajpa.version}</version>
 			</dependency>
 
+			<!-- Spring test -->
+			<dependency>
+				<groupId>org.springframework</groupId>
+				<artifactId>spring-test</artifactId>
+				<version>${spring.version}</version>
+			</dependency>
 			<!-- https://mvnrepository.com/artifact/org.springframework/spring-aspects -->
 			<!-- <dependency> <groupId>org.springframework</groupId> <artifactId>spring-aspects</artifactId> 
 				<version>4.1.1.RELEASE</version> </dependency> -->

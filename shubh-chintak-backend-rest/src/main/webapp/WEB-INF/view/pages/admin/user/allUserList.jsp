@@ -96,13 +96,13 @@
 
 
 					<form:form id="user_selection_form"
-						action="${pageContext.request.contextPath}/welcome/admin/allUsers1"
+						action="${pageContext.request.contextPath}/welcome/admin/user/user-details"
 						commandName="userDTO">
 						<table>
 							<tbody>
 								<tr>
-									<td>Producer:</td>
-									<td>User : <form:select path="username">
+									<td>User :</td>
+									<td><form:select path="username">
 											<form:options items="${allUserList}"  />
 										</form:select>
 										

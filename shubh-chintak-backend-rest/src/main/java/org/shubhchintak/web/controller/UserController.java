@@ -108,14 +108,14 @@ public class UserController {
 
 	}
 
-	@RequestMapping(value = "/admin/user/allUsers.html", method = RequestMethod.GET)
+	@RequestMapping(value = "/admin/user/allUsers", method = RequestMethod.GET)
 	public String getAllUsers(ModelMap modelMap, Principal principal) {
 		List<UserDTO> userDTOs = null;
 		try {
 			userDTOs = userService.getAllUsers(1l);
 			Map<String, String> userList = new HashMap<>();
 			for (UserDTO user : userDTOs) {
-				userList.put(user.getEmailId(), user.getEmailId());
+				userList.put(user.getUsername(), user.getUsername());
 			}
 			modelMap.addAttribute("allUserList", userList);
 			modelMap.addAttribute("userDTO", new UserDTO());
@@ -125,7 +125,7 @@ public class UserController {
 		return PageNameConstants.TILES_ALL_USERS_LIST_PAGE;
 	}
 
-	@RequestMapping(value = "/admin/allUsers", method = RequestMethod.GET)
+	@RequestMapping(value = "/admin/user/user-details", method = RequestMethod.POST)
 	@ResponseBody
 	public UserDTO getUserDetails(@RequestParam("username") String username, ModelMap modelMap) {
 		List<UserDTO> userDTOs = null;

@@ -138,26 +138,27 @@ public class UserServiceImpl implements UserService {
 
 	@Override
 	public List<UserDTO> getAllUsersSortByName(long organizationId) throws ApiException {
-				List<UserDTO> userDTOList = null;
-				List<User> users = null;
-				try {
-					users = userRepository.getAllUsersList(organizationId);
-					if (users != null && !users.isEmpty()) {
-						userDTOList = entityToModelConverter.userListToUserModelList(users);
-					}
-					//Sorting using Lambda 
-					//userDTOList.sort((userDTO1, userDTO2) -> userDTO1.getFirstName().compareTo(userDTO1.getFirstName()));
-					Collections
-						.sort(userDTOList, Comparator.comparing(UserDTO::getFirstName));
-					
-					//userDTOList.stream().forEach(System.out::println);
-					//userDTOList.sort((userDTO1, userDTO2) -> userDTO1.getFirstName().compareTo(userDTO1.getFirstName()));
-					
-				} catch (Exception e) {
-					logger.error(e.getMessage(), e);
-					throw new ApiException(e.getMessage(), e);
-				}
-				return userDTOList;
+		List<UserDTO> userDTOList = null;
+		List<User> users = null;
+		try {
+			users = userRepository.getAllUsersList(organizationId);
+			if (users != null && !users.isEmpty()) {
+				userDTOList = entityToModelConverter.userListToUserModelList(users);
+			}
+			// Sorting using Lambda
+			// userDTOList.sort((userDTO1, userDTO2) ->
+			// userDTO1.getFirstName().compareTo(userDTO1.getFirstName()));
+			Collections.sort(userDTOList, Comparator.comparing(UserDTO::getFirstName));
+
+			// userDTOList.stream().forEach(System.out::println);
+			// userDTOList.sort((userDTO1, userDTO2) ->
+			// userDTO1.getFirstName().compareTo(userDTO1.getFirstName()));
+
+		} catch (Exception e) {
+			logger.error(e.getMessage(), e);
+			throw new ApiException(e.getMessage(), e);
+		}
+		return userDTOList;
 	}
 
 }

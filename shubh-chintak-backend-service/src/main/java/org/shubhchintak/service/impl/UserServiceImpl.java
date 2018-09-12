@@ -52,8 +52,6 @@ public class UserServiceImpl implements UserService {
 		try {
 			users = userRepository.findByUserName(name);
 			if (users != null && !users.isEmpty()) {
-				// OrganizationDTO organizationDTO = entityToModelConverter
-				// .organizationToOrganizationDTO(users.get(0).getOrganization());
 				userDTO = entityToModelConverter.userToUserModel(users.get(0));
 			}
 		} catch (Exception e) {

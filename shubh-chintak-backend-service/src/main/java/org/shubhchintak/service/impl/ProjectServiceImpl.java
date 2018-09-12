@@ -12,8 +12,7 @@ import org.shubhchintak.common.dto.ProjectDTO;
 import org.shubhchintak.common.exception.ApiException;
 import org.shubhchintak.persistence.entity.Project;
 import org.shubhchintak.persistence.repository.ProjectRepository;
-import org.shubhchintak.service.converter.EntityToModelConverter;
-import org.shubhchintak.service.converter.ModelToEntityConverter;
+import org.shubhchintak.service.converter.ProjectConverter;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -34,10 +33,7 @@ public class ProjectServiceImpl implements ProjectService {
 	private ProjectRepository projectRepository;
 	
 	@Autowired
-	private ModelToEntityConverter modelToEntityConverter;
-	
-	@Autowired
-	private EntityToModelConverter entityToModelConverter;
+	private ProjectConverter projectConverter;
 
 	/*
 	 * (non-Javadoc)
@@ -52,9 +48,9 @@ public class ProjectServiceImpl implements ProjectService {
 			// get All projects from Repository
 			 List<Project> projects = projectRepository.getAllProjects(organizationId);
 			// Convert to PojectDTOs
-			 projectDTOs = entityToModelConverter.projectListToProjectodelList(projects);
+			 projectDTOs = projectConverter.convertToDTOList(projects);
 		} catch (Exception e) {
-			e.printStackTrace();
+			logger.error("getAllProjects : ",e);
 			throw new ApiException(e.getMessage(), e);
 		}
 
@@ -66,8 +62,7 @@ public class ProjectServiceImpl implements ProjectService {
 		Project project = null;
 		try {
 			//project entity converter 
-			project = modelToEntityConverter.projectModelToProject(projectDTO);
-			
+			project = projectConverter.convertToEntity(projectDTO);
 			//save entity
 			project = projectRepository.saveAndFlush(project);
 		} catch (Exception e) {

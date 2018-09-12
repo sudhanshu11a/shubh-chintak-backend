@@ -3,6 +3,8 @@
  */
 package org.shubhchintak.web.restcontroller;
 
+import java.util.List;
+
 import org.shubhchintak.api.service.UserService;
 import org.shubhchintak.common.dto.UserDTO;
 import org.slf4j.Logger;
@@ -47,4 +49,14 @@ public class UserRestController {
 		return new ResponseEntity<UserDTO>(userDTO, HttpStatus.OK);
 	}
 
+	@RequestMapping(value = "/all-users", method = RequestMethod.GET)
+	public ResponseEntity<List<UserDTO>> getUserDetails() {
+		List<UserDTO> userDTOs = null;
+		userDTOs = userService.getAllUsers(1l);
+		return new ResponseEntity<List<UserDTO>>(userDTOs, HttpStatus.OK);
+	}
+
+	public void createUser() {
+
+	}
 }

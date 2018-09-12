@@ -5,7 +5,7 @@ package org.shubhchintak.service.converter;
 
 import org.shubhchintak.common.dto.RoleDTO;
 import org.shubhchintak.persistence.entity.Role;
-import org.shubhchintak.service.converter.base.BaseEntityModelConverter;
+import org.shubhchintak.service.converter.base.BaseConverter;
 import org.springframework.stereotype.Component;
 
 /**
@@ -13,16 +13,16 @@ import org.springframework.stereotype.Component;
  *
  */
 @Component
-public final class RoleEntityModelConverter implements BaseEntityModelConverter<RoleDTO, Role> {
+public final class RoleConverter implements BaseConverter<RoleDTO, Role> {
 
 	@Override
-	public RoleDTO entityToDTO(Role entity) {
+	public RoleDTO convertToDTO(Role entity) {
 		// TODO Auto-generated method stub
 		return null;
 	}
 
 	@Override
-	public Role dtoToEntity(RoleDTO dto) {
+	public Role convertToEntity(RoleDTO dto) {
 		Role role = null;
 		if (dto != null) {
 			if (dto.getId() != null) {

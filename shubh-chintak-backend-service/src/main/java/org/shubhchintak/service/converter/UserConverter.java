@@ -15,7 +15,7 @@ import org.shubhchintak.persistence.entity.Role;
 import org.shubhchintak.persistence.entity.User;
 import org.shubhchintak.persistence.entity.UserDetails;
 import org.shubhchintak.persistence.repository.RoleRepository;
-import org.shubhchintak.service.converter.base.BaseEntityModelConverter;
+import org.shubhchintak.service.converter.base.BaseConverter;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Component;
@@ -25,27 +25,27 @@ import org.springframework.stereotype.Component;
  *
  */
 @Component
-public class UserEntityModelConverter implements BaseEntityModelConverter<UserDTO, User> {
+public class UserConverter implements BaseConverter<UserDTO, User> {
 
 	@Autowired
 	private PasswordEncoder passwordEncoder;
 
 	@Autowired
-	private UserDetailsEntityModelConverter userDetailsEntityModelConverter; 
+	private UserDetailsConverter userDetailsConverter; 
 	
 	@Autowired
 	RoleRepository roleRepository;
 
 	
 	@Autowired
-	private AddressEntityModelConverter addressEntityModelConverter;
+	private AddressConverter addressConverter;
 	
 	@Autowired
-	private UploadFileEntityModelConverter uploadFileEntityModelConverter;
+	private UploadConverter uploadConverter;
 	
 	
 	@Override
-	public UserDTO entityToDTO(User entity) {
+	public UserDTO convertToDTO(User entity) {
 		UserDTO userDTO = null;
 		if (entity != null) {
 
@@ -55,8 +55,8 @@ public class UserEntityModelConverter implements BaseEntityModelConverter<UserDT
 				RoleEnum roleEnum = role.getRoleName();
 				roleEnums.add(roleEnum);
 			}
-			AddressDTO addressDTO = addressEntityModelConverter.entityToDTO(entity.getUserDetails().getAddress());
-			UploadFileDTO profilePhoto = uploadFileEntityModelConverter.entityToDTO(entity.getUserDetails().getProfilePhoto());
+			AddressDTO addressDTO = addressConverter.convertToDTO(entity.getUserDetails().getAddress());
+			UploadFileDTO profilePhoto = uploadConverter.convertToDTO(entity.getUserDetails().getProfilePhoto());
 
 			userDTO = new UserDTO(entity.getId(), entity.getCreatedDate(), entity.getCreatedBy(),
 					entity.getModifiedDate(), entity.getModifiedBy(), entity.getActive(), entity.getPassword(),
@@ -70,12 +70,12 @@ public class UserEntityModelConverter implements BaseEntityModelConverter<UserDT
 	}
 
 	@Override
-	public User dtoToEntity(UserDTO dto) {
+	public User convertToEntity(UserDTO dto) {
 		User user = null;
 		Long organizationId =0l;
 		if (dto != null) {
 			// UserDetails conversion
-			UserDetails userDetails =  userDetailsEntityModelConverter.dtoToEntity(dto);
+			UserDetails userDetails =  userDetailsConverter.convertToEntity(dto);
 
 			// Password Encoding
 			final String encodedPassword = passwordEncoder.encode(dto.getPassword().trim());

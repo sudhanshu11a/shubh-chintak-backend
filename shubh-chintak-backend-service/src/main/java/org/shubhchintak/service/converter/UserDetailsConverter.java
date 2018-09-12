@@ -7,7 +7,7 @@ import org.shubhchintak.common.dto.UserDTO;
 import org.shubhchintak.persistence.entity.Address;
 import org.shubhchintak.persistence.entity.UploadFile;
 import org.shubhchintak.persistence.entity.UserDetails;
-import org.shubhchintak.service.converter.base.BaseEntityModelConverter;
+import org.shubhchintak.service.converter.base.BaseConverter;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
@@ -16,27 +16,27 @@ import org.springframework.stereotype.Component;
  *
  */
 @Component
-public final class UserDetailsEntityModelConverter implements BaseEntityModelConverter<UserDTO, UserDetails> {
+public final class UserDetailsConverter implements BaseConverter<UserDTO, UserDetails> {
 
 	@Autowired
-	private AddressEntityModelConverter addressEntityModelConverter;
+	private AddressConverter addressConverter;
 	
 	@Autowired
-	private UploadFileEntityModelConverter uploadFileEntityModelConverter;
+	private UploadConverter uploadConverter;
 	
 	@Override
-	public UserDTO entityToDTO(UserDetails entity) {
+	public UserDTO convertToDTO(UserDetails entity) {
 		// TODO Auto-generated method stub
 		return null;
 	}
 
 	@Override
-	public UserDetails dtoToEntity(UserDTO dto) {
+	public UserDetails convertToEntity(UserDTO dto) {
 		UserDetails userDetails = null;
 		long organizationId = 0l;
 		if (dto != null) {
-			Address address = addressEntityModelConverter.dtoToEntity(dto.getAddress());
-			UploadFile uploadFile = uploadFileEntityModelConverter.dtoToEntity(dto.getProfilePhoto());
+			Address address = addressConverter.convertToEntity(dto.getAddress());
+			UploadFile uploadFile = uploadConverter.convertToEntity(dto.getProfilePhoto());
 			if (dto.getId() != null) {
 				userDetails = new UserDetails(dto.getId(), dto.getCreatedDate(), dto.getCreatedBy(), null, null,
 						dto.getActive(), organizationId, dto.getFirstName().trim(), dto.getMiddleName().trim(),

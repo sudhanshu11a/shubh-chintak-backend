@@ -14,12 +14,11 @@ import org.shubhchintak.common.dto.UserPrincipal;
 import org.shubhchintak.common.exception.ApiException;
 import org.shubhchintak.persistence.entity.User;
 import org.shubhchintak.persistence.repository.UserRepository;
-import org.shubhchintak.service.converter.EntityToModelConverter;
-import org.shubhchintak.service.converter.ModelToEntityConverter;
+import org.shubhchintak.service.converter.OrganizationConverter;
+import org.shubhchintak.service.converter.UserConverter;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
@@ -37,10 +36,10 @@ public class UserServiceImpl implements UserService {
 	private static final Logger logger = LoggerFactory.getLogger(UserServiceImpl.class);
 
 	@Autowired
-	private ModelToEntityConverter modelToEntityConverter;
-
+	private OrganizationConverter organizationConverter;
+	
 	@Autowired
-	private EntityToModelConverter entityToModelConverter;
+	private UserConverter userConverter;
 
 	@Autowired
 	private UserRepository userRepository;
@@ -52,7 +51,7 @@ public class UserServiceImpl implements UserService {
 		try {
 			users = userRepository.findByUserName(name);
 			if (users != null && !users.isEmpty()) {
-				userDTO = entityToModelConverter.userToUserModel(users.get(0));
+				userDTO = userConverter.convertToDTO(users.get(0));
 			}
 		} catch (Exception e) {
 			logger.error(e.getMessage(), e);
@@ -75,9 +74,8 @@ public class UserServiceImpl implements UserService {
 				throw new UsernameNotFoundException(username);
 			}
 			user = users.get(0);
-			OrganizationDTO organizationDTO = entityToModelConverter
-					.organizationToOrganizationDTO(user.getOrganization());
-			UserDTO userDTO = entityToModelConverter.userToUserModel(user);
+			OrganizationDTO organizationDTO = organizationConverter.convertToDTO(user.getOrganization());
+			UserDTO userDTO = userConverter.convertToDTO(user);
 			userDetails = new UserPrincipal(userDTO, organizationDTO);
 		} finally {
 			user = null;
@@ -93,12 +91,11 @@ public class UserServiceImpl implements UserService {
 		if (userDTO != null) {
 			try {
 				// current user information
-				UserPrincipal currentUserPrincipal = (UserPrincipal) SecurityContextHolder.getContext()
-						.getAuthentication().getPrincipal();
+				//UserPrincipal currentUserPrincipal = (UserPrincipal) SecurityContextHolder.getContext()
+				//		.getAuthentication().getPrincipal();
 
 				// Converter to user entity
-				user = modelToEntityConverter.userModelToUser(userDTO, currentUserPrincipal.getCurrentUserId(),
-						currentUserPrincipal.getOrganizationId());
+				user = userConverter.convertToEntity(userDTO);
 				// call repository for saving user
 				userRepository.saveAndFlush(user);
 			} catch (Exception e) {
@@ -123,7 +120,7 @@ public class UserServiceImpl implements UserService {
 			if (users != null && !users.isEmpty()) {
 				// organizationDTO =
 				// entityToModelConverter.organizationToOrganizationDTO(users.get(0).getOrganization());
-				userDTOList = entityToModelConverter.userListToUserModelList(users);
+				userDTOList = userConverter.convertToDTOList(users);
 				// userInfoDTOList =
 				// modelToModelConverter.userDTOListToUserInfoDTOList(userDTOList);
 			}
@@ -141,7 +138,7 @@ public class UserServiceImpl implements UserService {
 		try {
 			users = userRepository.getAllUsersList(organizationId);
 			if (users != null && !users.isEmpty()) {
-				userDTOList = entityToModelConverter.userListToUserModelList(users);
+				userDTOList = userConverter.convertToDTOList(users);
 			}
 			// Sorting using Lambda
 			// userDTOList.sort((userDTO1, userDTO2) ->

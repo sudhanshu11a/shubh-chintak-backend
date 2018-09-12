@@ -5,7 +5,7 @@ package org.shubhchintak.service.converter;
 
 import org.shubhchintak.common.dto.UploadFileDTO;
 import org.shubhchintak.persistence.entity.UploadFile;
-import org.shubhchintak.service.converter.base.BaseEntityModelConverter;
+import org.shubhchintak.service.converter.base.BaseConverter;
 import org.springframework.stereotype.Component;
 
 /**
@@ -13,10 +13,10 @@ import org.springframework.stereotype.Component;
  *
  */
 @Component
-public final class UploadFileEntityModelConverter implements BaseEntityModelConverter<UploadFileDTO, UploadFile> {
+public final class UploadConverter implements BaseConverter<UploadFileDTO, UploadFile> {
 
 	@Override
-	public UploadFileDTO entityToDTO(UploadFile entity) {
+	public UploadFileDTO convertToDTO(UploadFile entity) {
 		UploadFileDTO uploadFileDTO = null;
 		if (entity != null) {
 			uploadFileDTO = new UploadFileDTO(entity.getId(), entity.getCreatedDate(), entity.getCreatedBy(),
@@ -27,7 +27,7 @@ public final class UploadFileEntityModelConverter implements BaseEntityModelConv
 	}
 
 	@Override
-	public UploadFile dtoToEntity(UploadFileDTO dto) {
+	public UploadFile convertToEntity(UploadFileDTO dto) {
 		UploadFile uploadFile = null;
 		Long organizationId =0l;
 		if (dto != null) {

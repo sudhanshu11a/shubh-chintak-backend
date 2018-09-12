@@ -7,7 +7,7 @@ import org.shubhchintak.common.dto.ProjectDTO;
 import org.shubhchintak.common.dto.UploadFileDTO;
 import org.shubhchintak.persistence.entity.Project;
 import org.shubhchintak.persistence.entity.UploadFile;
-import org.shubhchintak.service.converter.base.BaseEntityModelConverter;
+import org.shubhchintak.service.converter.base.BaseConverter;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
@@ -16,21 +16,21 @@ import org.springframework.stereotype.Component;
  *
  */
 @Component
-public final class ProjectEntityModelConverter implements BaseEntityModelConverter<ProjectDTO, Project>{
+public final class ProjectConverter implements BaseConverter<ProjectDTO, Project>{
 
 	@Autowired
-	private UploadFileEntityModelConverter uploadFileEntityModelConverter;
+	private UploadConverter uploadConverter;
 	
 	@Override
-	public ProjectDTO entityToDTO(Project entity) {
+	public ProjectDTO convertToDTO(Project entity) {
 		ProjectDTO projectDTO = null;
 		if (entity != null) {
 			UploadFile bannerImageEntity = null;
-			UploadFileDTO logoImage = uploadFileEntityModelConverter.entityToDTO(entity.getLogoImage());
+			UploadFileDTO logoImage = uploadConverter.convertToDTO(entity.getLogoImage());
 			if (entity.getBannerImage() != null ) {
 				bannerImageEntity = entity.getBannerImage();
 			}
-			UploadFileDTO bannerImage = uploadFileEntityModelConverter.entityToDTO(bannerImageEntity);
+			UploadFileDTO bannerImage = uploadConverter.convertToDTO(bannerImageEntity);
 			projectDTO = new ProjectDTO(entity.getId(), entity.getCreatedDate(), entity.getCreatedBy(),
 					entity.getModifiedDate(), entity.getModifiedBy(), entity.getActive(), entity.getName(),
 					entity.getDescription(), entity.getHeading(), entity.getDisplayDetails(), entity.getStartDate(),
@@ -40,7 +40,7 @@ public final class ProjectEntityModelConverter implements BaseEntityModelConvert
 	}
 
 	@Override
-	public Project dtoToEntity(ProjectDTO dto) {
+	public Project convertToEntity(ProjectDTO dto) {
 		Project project = null;
 		if (dto != null) {
 			UploadFile logoImage = null;

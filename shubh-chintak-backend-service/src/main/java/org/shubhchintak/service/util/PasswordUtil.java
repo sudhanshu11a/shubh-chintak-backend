@@ -4,6 +4,7 @@
 package org.shubhchintak.service.util;
 
 import org.springframework.security.authentication.encoding.Md5PasswordEncoder;
+import org.springframework.stereotype.Component;
 
 /**
  * Util for crating password 
@@ -11,9 +12,10 @@ import org.springframework.security.authentication.encoding.Md5PasswordEncoder;
  * @author sudhanshusharma
  *
  */
+@Component
 public class PasswordUtil {
 
-	public static String convertPassword(String password) {
+	public String convertPassword(String password) {
 		String encodedPassword = null;
 		if (password != null && "".equals(password.trim())) {
 			Md5PasswordEncoder encoder = new Md5PasswordEncoder();

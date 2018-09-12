@@ -7,7 +7,7 @@ import java.util.List;
 
 import org.shubhchintak.common.dto.AddressDTO;
 import org.shubhchintak.persistence.entity.Address;
-import org.shubhchintak.service.converter.base.BaseEntityModelConverter;
+import org.shubhchintak.service.converter.base.BaseConverter;
 import org.springframework.stereotype.Component;
 
 /**
@@ -15,10 +15,10 @@ import org.springframework.stereotype.Component;
  *
  */
 @Component
-public class AddressEntityModelConverter implements BaseEntityModelConverter<AddressDTO, Address>{
+public class AddressConverter implements BaseConverter<AddressDTO, Address>{
 
 	@Override
-	public AddressDTO entityToDTO(Address entity) {
+	public AddressDTO convertToDTO(Address entity) {
 		AddressDTO addressDTO = null;
 		if (entity != null) {
 			addressDTO = new AddressDTO(entity.getId(), entity.getCreatedDate(), entity.getCreatedBy(),
@@ -28,7 +28,7 @@ public class AddressEntityModelConverter implements BaseEntityModelConverter<Add
 	}
 
 	@Override
-	public Address dtoToEntity(AddressDTO dto) {
+	public Address convertToEntity(AddressDTO dto) {
 		Address address = null;
 		Long organizationId = 0l;
 		if (dto != null) {
